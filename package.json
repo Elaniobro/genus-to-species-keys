@@ -1,0 +1,86 @@
+{
+  "name": "genus-to-species-keys",
+  "version": "1.0.0",
+  "description": "Type ahead search for species keys",
+  "main": "index.js",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Elaniobro/genus-to-species-keys.git"
+  },
+  "keywords": ["fungi", "mycology", "mushrooms"],
+  "author": {
+    "name": "Elan Trybuch",
+    "email": "elan@trybuch.com",
+    "url": "https://elan.trybuch.com"
+  },
+  "bugs": {
+    "url": "https://github.com/Elaniobro/genus-to-species-keys/issues"
+  },
+  "homepage": "https://github.com/Elaniobro/genus-to-species-keys#readme",
+  "license": "MIT",
+   "scripts": {
+    "commitlint": "commitlint",
+    "lint:js": "eslint --ext \".js,.ts,.vue\" --ignore-path .gitignore .",
+    "lint:prettier": "prettier --check .",
+    "lint:style": "stylelint \"**/*.{css,scss,sass,html,vue}\" --ignore-path .gitignore --allow-empty-input",
+    "lint": "pnpm lint:js && pnpm lint:style && pnpm lint:prettier",
+    "lintfix": "prettier --write --list-different . && pnpm lint:js --fix && pnpm lint:style --fix",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "*.{js,ts,vue}": "eslint --cache",
+    "*.{css,scss,sass,html,vue}": "stylelint",
+    "*.**": "prettier --check --ignore-unknown"
+  },
+
+  "dependencies": {},
+  "devDependencies": {
+    "@commitlint/cli": "^17.4.2",
+    "@semantic-release/changelog": "github:semantic-release/changelog",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "github:semantic-release/github",
+    "@semantic-release/release-notes-generator": "github:semantic-release/release-notes-generator",
+    "commitizen": "^4.3.0",
+    "cz-conventional-changelog": "^3.3.0",
+    "semantic-release": "^20.1.0",
+    "eslint": "^8.22.0",
+    "eslint-config-prettier": "^8.5.0",
+    "husky": "^8.0.2",
+    "lint-staged": "^13.0.3",
+    "prettier": "^2.7.1",
+    "stylelint": "^14.11.0",
+    "stylelint-config-prettier": "^9.0.3",
+    "stylelint-config-standard": "^28.0.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "engines": {
+    "node": "^18.14.0"
+  },
+  "release": {
+    "branches": [
+      "main"
+    ],
+    "tagFormat": "${version}",
+    "plugins": [
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/changelog",
+      [
+        "@semantic-release/git",
+        {
+          "assets": [
+            "CHANGELOG.md",
+            "package.json",
+            "pnpm-lock.yaml"
+          ],
+          "message": "chore(release): v${nextRelease.version} [release]"
+        }
+      ],
+      "@semantic-release/github"
+    ]
+  }
+}
